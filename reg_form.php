@@ -25,11 +25,21 @@ if($_POST['reg_id']){
     }else{
         echo "User Not Registered ";
     }
-    
+    ?>
+    <script>
+        window.location.href = "nutsTable.php";
+    </script>
+    <?php
     }
 else if($_POST['nameEdit']){
-    $update_detail = mysqli_query($con,"UPDATE `gn_nuts` SET `name`='$_POST[nameEdit]',`mobile`='$_POST[mobileEdit]',`email`='$_POST[emailEdit]' WHERE `id` = '$_POST[reg_id]'");
-    echo "UPDATE `gn_nuts` SET `name`='$_POST[nameEdit]',`mobile`='$_POST[mobileEdit]',`email`='$_POST[emailEdit]' WHERE `id` = '$_POST[reg_id2]'";
+    $update_detail = mysqli_query($con,"UPDATE `gn_nuts` SET `name`='$_POST[nameEdit]',`mobile`='$_POST[mobileEdit]',`email`='$_POST[emailEdit]' WHERE `id` = '$_POST[reg_id2]'");
+    // if($update_detail){echo "Done";}else{echo "Not";}
+    // echo "UPDATE `gn_nuts` SET `name`='$_POST[nameEdit]',`mobile`='$_POST[mobileEdit]',`email`='$_POST[emailEdit]' WHERE `id` = '$_POST[reg_id2]'";
+    ?>
+    <script>
+        window.location.href = "nutsTable.php";
+    </script>
+    <?php 
  
 }
 else if($_POST['regNo']){

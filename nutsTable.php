@@ -27,7 +27,7 @@
                             <th scope="col">Gender</th>
                             <th scope="col">Contact No.</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Inserted At</th>
+                            <th scope="col">Registration Date</th>
                         </tr>
                     </thead>
 
@@ -50,7 +50,8 @@
                                     <td><?php echo $fetchData['gender']; ?></td>
                                     <td><?php echo $fetchData['mobile']; ?></td>
                                     <td><?php echo $fetchData['email']; ?></td>
-                                    <td><?php echo $fetchData['inserted_at']; ?></td>
+                                    <?php $regDate = strtotime($fetchData['inserted_at']); ?>
+                                    <td><?php echo date('d-M-Y',$regDate); ?></td>
                                 </tr>
                                 <div class="modal fade" id="editModal<?php echo $fetchData['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -61,7 +62,7 @@
 
                                             </div>
                                             <div class="modal-body">
-                                                <form class="requires-validation" id="reg_form2">
+                                                <form class="requires-validation" id="reg_form2" action="reg_form.php" method="post">
                                                 <input type="hidden" name="reg_id2" value="<?php echo $fetchData['id']; ?>" id="userID">
                                                     <div class="col-md-12">
                                                         <input class="form-control" type="text" value="<?php echo $getDetail['name']?>" name="nameEdit" placeholder="Full Name" required>
@@ -101,7 +102,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="requires-validation" id="Plan_form2">
+                                                <form class="requires-validation" id="Plan_form2"  action="reg_form.php" method="post">
                                                     <input type="hidden" name="reg_id" value="<?php echo $fetchData['id']; ?>" id="userID">
                                                     <div class="col-md-12">
                                                         <select name="type" id="planType" class="form-select mt-3" required>
@@ -152,7 +153,7 @@
         </div>
     </div>
 </body>
-<script>
+<!-- <script>
     $(function() {
 
         $('#Plan_form2').on('submit', function(e) {
@@ -172,17 +173,14 @@
                         .then(function() {
                             window.location.href = "nutsTable.php";
                         });
-                    // document.getElementById("regDetail").style.display = "none";
-                    // document.getElementById("planDetail").style.display = "block";
-                    // document.getElementById("userID").setAttribute("value", userID);
                 }
             });
 
         });
 
     });
-</script>
-<script>
+</script> -->
+<!-- <script>
     $(function() {
 
         $('#reg_form2').on('submit', function(e) {
@@ -209,5 +207,5 @@
         });
 
     });
-</script>
+</script> -->
 </html>
