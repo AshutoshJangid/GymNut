@@ -33,8 +33,34 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
+
+        </li>
+        <li>
+        <button type="button" id="logoutBtn" class="btn btn-outline-danger btn-sm pull-right">Logout</button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<script>
+  $('#logoutBtn').on('click',function(e){
+    swal({
+    title: "Are you sure you want to Logout?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: '#DD6B55',
+    confirmButtonText: 'Yes, I am sure!',
+    cancelButtonText: "No!",
+    closeOnConfirm: false,
+    closeOnCancel: false
+ }).then(function(isConfirm) {
+      if (isConfirm) {
+    window.location.href = "logout.php";
+    } else {
+      swal("Cancelled", "error");
+         e.preventDefault();
+    }
+ });
+});
+  
+</script>

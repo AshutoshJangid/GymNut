@@ -1,3 +1,53 @@
+<?php
+
+require 'PHPMailerAutoload.php';
+require 'credential.php';
+
+$mail = new PHPMailer;
+
+$mail->SMTPDebug = 4;                               // Enable verbose debug output
+
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = 'smtp.gmail.com;';  // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Username = EMAIL;                 // SMTP username
+$mail->Password = PASS;                           // SMTP password
+$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 587;                                    // TCP port to connect to
+
+$mail->setFrom(EMAIL, 'Test Mail');
+$mail->addAddress('ashujangid16786@gmail.com');     // Add a recipient
+$mail->addAddress('ashujangid16786@gmail.com');               // Name is optional
+//  $mail->addReplyTo('info@example.com', 'Information');
+//  $mail->addCC('cc@example.com');
+//  $mail->addBCC('bcc@example.com');
+
+//  $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+//  $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+$mail->isHTML(true);                                  // Set email format to HTML
+
+$mail->Subject = 'Here is the subject';
+$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+if(!$mail->send()) {
+    echo 'Message could not be sent.';
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    echo 'Message has been sent';
+}
+
+
+// phpinfo();
+// die;
+session_start();
+if(!isset($_SESSION['loggedin']) || ($_SESSION['loggedin']!=true)){
+    session_unset();
+    session_destroy();
+    header("location:login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,25 +55,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
-    <script>
-        (function() {
-            'use strict'
-            const forms = document.querySelectorAll('.requires-validation')
-            Array.from(forms)
-                .forEach(function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script>
+    <title>Index Page</title>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
 
@@ -192,16 +225,14 @@
     <?php include 'header.php'; ?>
 </div>
     <div>
-        <?php 
-        $mail = mail('ashujangid16786@gmail.com','test mail','hello world','From: ashutoshjangid99@gmail.com');
-        //print ($mail) ?  "<script>alert('Passed')</script>" : "<script>alert('not')</script>";
-        ?>
+       
         <!-- Basic Detail -->
         <div class="form-body">
             <div class="row">
                 <div class="form-holder">
                     <div class="form-content" id="regDetail">
                         <div class="form-items">
+                            <h6>Welcome <?php echo $_SESSION['username']; ?> </h6>
                             <h3>Register New Gym Nut</h3>
                             <p>Fill in the data below.</p>
                             <form class="requires-validation" id="reg_form">
